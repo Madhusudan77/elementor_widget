@@ -1,0 +1,114 @@
+.content_main_class .content_class {
+    width: 100%;
+    padding: 30px;
+    background: #cccccc;
+    border: 1px solid #c8c8c8;
+    box-shadow: 0px 1px 7px 2px #9b9b9b;
+}
+.content_main_class .content_inner_class {
+    padding: 25px;
+}
+.content_main_class .image_class img {
+    width: 100%;
+}
+.content_main_class .image_class {
+    height: 100%;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    transition : all .5s;
+}
+.content_main_class .image_outer_class {
+    overflow: hidden;
+}
+.content_main_class .content_class:hover .image_class {
+    transform: scale(1.1);
+}
+
+.content_main_class h3.post_title {
+    padding: 0;
+    margin: 0;
+}
+
+.content_main_class{
+    position: relative;
+    height: 600px;
+}
+
+.content_main_class ul.slick-dots {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.content_main_class button.slick-next.slick-arrow, .content_main_class button.slick-prev.slick-arrow {
+    position: absolute;
+    bottom: 0;
+    transition: all .3s;
+}
+
+.content_main_class button.slick-next.slick-arrow {
+    right: 20px;
+    width: 0;
+    background: none;
+    font-size: 0;
+    height: 0;
+    border-right: 0 solid transparent;
+    border-left: 20px solid #113463;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+.content_main_class button.slick-prev.slick-arrow {
+    left: 20px;
+    width: 0;
+    background: none;
+    font-size: 0;
+    border-left: 0 solid transparent;
+    border-right: 20px solid #113463;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+
+.content_main_class button.slick-prev.slick-arrow:hover {
+    transform: scale(1.3);
+    border-left: 0px solid transparent;
+    border-right: 25px solid #474747;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+.content_main_class button.slick-next.slick-arrow:hover {
+    transform: scale(1.3);
+    border-left: 25px solid #474747;
+    border-right: 0px solid transparent;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+
+.content_main_class ul.slick-dots li {
+    margin: 5px;
+}
+
+.content_main_class ul.slick-dots ::marker {
+    display: none !important;
+    font-size: 0;
+}
+.content_main_class ul.slick-dots li button {
+    border-radius: 50%;
+    font-size: 10px;
+    background: #113463;
+    transition: all .3s;
+}
+.content_main_class ul.slick-dots li button:hover {
+    transform: scale(1.2);
+    background: #474747;
+}
+.outer_class h2.show_head_title {
+    margin: 0;
+}
+
+.content_main_class ul.slick-dots li.slick-active button {
+    transform: scale(1.2);
+    background: #474747 !important;
+}  
