@@ -33,6 +33,10 @@ class Custom_slider_widget extends \Elementor\Widget_Base {
 	}
 
 
+	public function get_icon() {
+		return 'eicon-post-slider';
+	}
+
 	public function get_categories() {
 		return [ 'basic' ];
 	}
@@ -119,6 +123,9 @@ class Custom_slider_widget extends \Elementor\Widget_Base {
 				'label_off' => esc_html__( 'Remove', 'essential-elementor-widget' ),
 				'return_value' => 'yes',
 				'default' => 'yes',
+				'condition' => [
+					'show_title' => 'yes',
+				],
 			]
 		);
 
@@ -148,6 +155,23 @@ class Custom_slider_widget extends \Elementor\Widget_Base {
 			]
 		);
 
+
+		//adj
+		$this->add_control(
+			'play_speed',
+			[
+				'label' => esc_html__( 'Speed for slides(in secs *10 min 100)', 'essential-elementor-widget' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 100,
+				'max' => 500,
+				'step' => 50,
+				'default' => 100,
+				'condition' => [
+					'auto_scroll' => 'yes',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 
@@ -160,6 +184,8 @@ class Custom_slider_widget extends \Elementor\Widget_Base {
 			]
 		);
 
+
+		//want to show post title
 		$this->add_control(
 			'title_options',
 			[
@@ -169,43 +195,49 @@ class Custom_slider_widget extends \Elementor\Widget_Base {
 			]
 		);
 
+
+		//heading color
 		$this->add_control(
-			'title_color',
+			'heading_color',
 			[
-				'label' => esc_html__( 'Color', 'essential-elementor-widget' ),
+				'label' => esc_html__( 'Heading Color', 'essential-elementor-widget' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'default' => '#000000',
 				'selectors' => [
-					'{{WRAPPER}} h2' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .show_head_title' => 'color: {{VALUE}}',
 				],
 			]
 		);	
 
+
+		//heading typography
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'title_typography',
-				'selector' => '{{WRAPPER}} h3',
-			]
+				'name' => 'heading_typography',
+				'label' => esc_html__( 'Heading Typography', 'essential-elementor-widget' ),
+				'selector' => '{{WRAPPER}} .show_head_title',
+			],
 		);
 		
 
+		//heading alignment
 		$this->add_responsive_control(
 			'text_align',
 			[
-				'label' => esc_html__( 'Alignment', 'plugin-name' ),
+				'label' => esc_html__( 'Heading Alignment', 'essential-elementor-widget' ),
 				'type' => \Elementor\Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'plugin-name' ),
+						'title' => esc_html__( 'Left', 'essential-elementor-widget' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'plugin-name' ),
+						'title' => esc_html__( 'Center', 'essential-elementor-widget' ),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'plugin-name' ),
+						'title' => esc_html__( 'Right', 'essential-elementor-widget' ),
 						'icon' => 'eicon-text-align-right',
 					],
 				],
@@ -214,26 +246,83 @@ class Custom_slider_widget extends \Elementor\Widget_Base {
 			]
 		);
 
+
+		//post title color
+		$this->add_control(
+			'title_color',
+			[
+				'label' => esc_html__( 'Post title Color', 'essential-elementor-widget' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#000000',
+				'selectors' => [
+					'{{WRAPPER}} .post_title' => 'color: {{VALUE}}',
+				],
+			]
+		);	
+
+
+		//post title typography
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'title_typography',
+				'label' => esc_html__( 'Post title Typography', 'essential-elementor-widget' ),
+				'selector' => '{{WRAPPER}} .post_title',
+			],
+		);
+
+
+
+		//post title align
+		$this->add_responsive_control(
+			'title_align',
+			[
+				'label' => esc_html__( 'Title Alignment', 'essential-elementor-widget' ),
+				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'essential-elementor-widget' ),
+						'icon' => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'essential-elementor-widget' ),
+						'icon' => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'essential-elementor-widget' ),
+						'icon' => 'eicon-text-align-right',
+					],
+				],
+				'default' => 'center',
+				'toggle' => true,
+			]
+		);
+		
+
 		$this->end_controls_section();	
 
 	}
 
 	protected function render() {
 
-
 		$settings = $this->get_settings_for_display();
+
+
 		$post_slug = $settings['post_slug'];   // add the slug of the post type
 		$number = $settings['no_of_posts'];   //no of posts
 		$slides_to_show = $settings['slides_to_show'];   //no of slides want to show in a glance
 		$add_dots = $settings['add_dots'];   //dots for sliders to slide
-		$auto_scroll = $settings['auto_scroll'];   //dots for sliders to slide
-		$loop = new WP_Query( array( 'post_type' => $post_slug, 'posts_per_page' => $number ) );
-		?>
+		$auto_scroll = $settings['auto_scroll'];   //slider auto scroll
+		$play_speed = $settings['play_speed']*10;  //autoslide play speed
+
+
+		$loop = new WP_Query( array( 'post_type' => $post_slug, 'posts_per_page' => $number ) ); ?>
 		<?php if($loop->have_posts()): ?>
 			<div class="outer_class">
 				<input type="hidden" id="no_of_slides" name="no_of_slides" value="<?php echo $slides_to_show; ?>">
-				<input type="hidden" id="add_dots" name="add_dots" value="<?php echo $add_dots; ?>">
-				<input type="hidden" id="auto_scroll" name="auto_scroll" value="<?php echo $auto_scroll; ?>">
+				<input type="hidden" id="add_dots" name="add_dots" value="<?php echo $add_dots; ?>"><!-- inpput to add dots -->
+				<input type="hidden" id="auto_scroll" name="auto_scroll" value="<?php echo $auto_scroll; ?>"><!-- inpput to add auto scroll -->
+				<input type="hidden" id="play_speed" name="play_speed" value="<?php echo $play_speed; ?>"><!-- inpput to add play speed -->
 				<h2 class="show_head_title" style="text-align: <?php echo esc_attr( $settings['text_align'] ); ?>;"><?php echo $settings['show_head_title']; ?></h2>
 				
 				<div class="slider-class content_main_class">
@@ -249,12 +338,12 @@ class Custom_slider_widget extends \Elementor\Widget_Base {
 						  		<?php if ( 'yes' === $settings['show_title'] ) { ?>
 						  			<?php if ( 'yes' === $settings['title_link'] ) { ?>
 						  				<a href="<?php the_permalink(); ?>">
-						  					<h3 class="post_title">
+						  					<h3 class="post_title" style="text-align: <?php echo esc_attr( $settings['title_align'] ); ?>;">
 												<?php echo get_the_title();?>
 											</h3>
 						  				</a>
 							  		<?php }else { ?>
-							  			<h3 class="post_title">
+							  			<h3 class="post_title"  style="text-align: <?php echo esc_attr( $settings['title_align'] ); ?>;">
 											<?php echo get_the_title();?>
 										</h3>
 								<?php } }?>

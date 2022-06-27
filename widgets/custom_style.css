@@ -32,7 +32,7 @@
 
 .content_main_class{
     position: relative;
-    height: 600px;
+    height: auto;
 }
 
 .content_main_class ul.slick-dots {
@@ -45,7 +45,7 @@
 }
 .content_main_class button.slick-next.slick-arrow, .content_main_class button.slick-prev.slick-arrow {
     position: absolute;
-    bottom: 0;
+    bottom: -20px;
     transition: all .3s;
 }
 
@@ -112,3 +112,44 @@
     transform: scale(1.2);
     background: #474747 !important;
 }  
+
+
+/*list and grid view*/
+#container_class ul { 
+    list-style: none; 
+}
+#container_class .buttons { 
+    margin-bottom: 20px; 
+}
+
+#container_class .list .content_inner_class { 
+    width: 100%; 
+    border-bottom: 1px dotted #CCC; 
+    margin-bottom: 10px; 
+    padding-bottom: 10px; 
+}
+
+#container .grid .image_outer_class_view .image_class_view {
+    float: left;
+    height: 160px;
+    width: 33.33%;
+    border-right: 1px dotted #CCC;
+    border-bottom: 1px dotted #CCC;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 10px; 
+    padding-bottom: 10px; 
+    padding-right: 10px; 
+}
+#container .list .image_outer_class_view .image_class_view {
+    height: 160px;
+    width: 33.33%;
+    border-right: 1px dotted #CCC;
+    border-bottom: 1px dotted #CCC;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 10px; 
+    padding-bottom: 10px; 
+}
