@@ -100,6 +100,8 @@ class Essential_Elementor_Card_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+
+		//title for the slider
 		$this->add_control(
 			'title_options',
 			[
@@ -109,6 +111,7 @@ class Essential_Elementor_Card_Widget extends \Elementor\Widget_Base {
 			]
 		); 
 
+		//give color to the title
 		$this->add_control(
 			'title_color',
 			[
@@ -121,6 +124,8 @@ class Essential_Elementor_Card_Widget extends \Elementor\Widget_Base {
 			]
 		);	
 
+
+		//give style to the slider
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
@@ -129,7 +134,7 @@ class Essential_Elementor_Card_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
-
+		//
 		$this->add_control(
 			'description_options',
 			[

@@ -148,33 +148,6 @@ class Custom_slider_widget extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'play_speed',
-			[
-				'label' => esc_html__( 'Autoplay Speed', 'essential-elementor-widget' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 1000,
-						'step' => 5,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'default' => [
-					'unit' => '%',
-					'size' => 50,
-				],
-				'selectors' => [
-					'{{WRAPPER}}' => 'width: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
 		$this->end_controls_section();
 
 
